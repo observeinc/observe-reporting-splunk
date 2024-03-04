@@ -8,3 +8,12 @@ if [ ! -h $APP_HOME ]; then
 else
     echo "Found Symlink To Splunk App at: ${APP_HOME}"
 fi
+
+# to build the front end you need to be in
+#/Users/kchamplin/splunk/observeinc/observe-reporting-splunk/SUIT/SUIT-setup-page-example
+# and then run
+# yarn build
+
+# Copy the build artifacts from our Splunk UI project
+UI_SOURCE="/Users/kchamplin/splunk/observeinc/observe-reporting-splunk/SUIT/SUIT-setup-page-example/packages/setup-example-app/stage/appserver/static/pages"
+cp $UI_SOURCE/pages.js $APP_HOME/appserver/static/pages/settings.js
