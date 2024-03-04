@@ -1,0 +1,5 @@
+<nav color="#ffffff">
+  <view name="search" default="true"/>
+  <view name="settings"/>
+
+</nav>
