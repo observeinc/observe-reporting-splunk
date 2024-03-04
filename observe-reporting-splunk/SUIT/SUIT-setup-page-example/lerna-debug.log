@@ -1,0 +1,89 @@
+0 silly input [ 'build' ]
+1 silly flags {
+1 silly flags   _: [ 'run' ],
+1 silly flags   'reject-cycles': false,
+1 silly flags   rejectCycles: false,
+1 silly flags   script: 'build',
+1 silly flags   args: []
+1 silly flags }
+2 verbose rootPath /Users/kchamplin/splunk/SUIT/SUIT-setup-page-example
+3 info version 2.11.0
+4 silly existsSync /Users/kchamplin/splunk/SUIT/SUIT-setup-page-example/VERSION
+5 silly initialize attempt
+6 silly initialize success
+7 silly execute attempt
+8 silly runScriptInDir build [] setup-component
+9 silly getExecOpts {
+9 silly getExecOpts   cwd: '/Users/kchamplin/splunk/SUIT/SUIT-setup-page-example/packages/setup-component'
+9 silly getExecOpts }
+10 error build Errored while running script in '@splunk/setup-component'
+11 error execute callback with error
+12 error Error: Command failed: yarn run build
+12 error error Command failed with exit code 2.
+12 error $ NODE_ENV=production webpack --bail
+12 error Hash: 308d62657d578f90dbee
+12 error Version: webpack 4.46.0
+12 error Time: 717ms
+12 error Built at: 03/03/2024 8:38:53 PM
+12 error  1 asset
+12 error Entrypoint SetupComponent = SetupComponent.js
+12 error [0] ./src/SetupComponent.jsx 5.88 KiB {0} [built] [failed] [1 error]
+12 error
+12 error ERROR in ./src/SetupComponent.jsx
+12 error Module build failed (from /Users/kchamplin/splunk/SUIT/SUIT-setup-page-example/node_modules/babel-loader/lib/index.js):
+12 error SyntaxError: /Users/kchamplin/splunk/SUIT/SUIT-setup-page-example/packages/setup-component/src/SetupComponent.jsx: Identifier 'tenant_id' has already been declared. (90:39)
+12 error
+12 error   88 | }
+12 error   89 |
+12 error > 90 | async function updatePassword(password,tenant_id) {
+12 error      |                                        ^
+12 error   91 |     const fetchInit = defaultFetchInit; // from splunk-utils API
+12 error   92 |     const tenant_id = getObserveTenant();
+12 error   93 |     fetchInit.method = 'POST';
+12 error     at instantiate (/Users/kchamplin/splunk/SUIT/SUIT-setup-page-example/node_modules/@babel/parser/lib/index.js:67:32)
+12 error     at constructor (/Users/kchamplin/splunk/SUIT/SUIT-setup-page-example/node_modules/@babel/parser/lib/index.js:364:12)
+12 error     at JSXParserMixin.raise (/Users/kchamplin/splunk/SUIT/SUIT-setup-page-example/node_modules/@babel/parser/lib/index.js:3364:19)
+12 error     at ScopeHandler.checkRedeclarationInScope (/Users/kchamplin/splunk/SUIT/SUIT-setup-page-example/node_modules/@babel/parser/lib/index.js:1586:19)
+12 error     at ScopeHandler.declareName (/Users/kchamplin/splunk/SUIT/SUIT-setup-page-example/node_modules/@babel/parser/lib/index.js:1569:14)
+12 error     at JSXParserMixin.declareNameFromIdentifier (/Users/kchamplin/splunk/SUIT/SUIT-setup-page-example/node_modules/@babel/parser/lib/index.js:10756:16)
+12 error     at JSXParserMixin.checkIdentifier (/Users/kchamplin/splunk/SUIT/SUIT-setup-page-example/node_modules/@babel/parser/lib/index.js:10752:12)
+12 error     at JSXParserMixin.checkLVal (/Users/kchamplin/splunk/SUIT/SUIT-setup-page-example/node_modules/@babel/parser/lib/index.js:10686:12)
+12 error     at JSXParserMixin.checkParams (/Users/kchamplin/splunk/SUIT/SUIT-setup-page-example/node_modules/@babel/parser/lib/index.js:12327:12)
+12 error     at JSXParserMixin.<anonymous> (/Users/kchamplin/splunk/SUIT/SUIT-setup-page-example/node_modules/@babel/parser/lib/index.js:12300:14)
+12 error     at JSXParserMixin.parseBlockOrModuleBlockBody (/Users/kchamplin/splunk/SUIT/SUIT-setup-page-example/node_modules/@babel/parser/lib/index.js:13514:23)
+12 error     at JSXParserMixin.parseBlockBody (/Users/kchamplin/splunk/SUIT/SUIT-setup-page-example/node_modules/@babel/parser/lib/index.js:13489:10)
+12 error     at JSXParserMixin.parseBlock (/Users/kchamplin/splunk/SUIT/SUIT-setup-page-example/node_modules/@babel/parser/lib/index.js:13477:10)
+12 error     at JSXParserMixin.parseFunctionBody (/Users/kchamplin/splunk/SUIT/SUIT-setup-page-example/node_modules/@babel/parser/lib/index.js:12287:24)
+12 error     at JSXParserMixin.parseFunctionBodyAndFinish (/Users/kchamplin/splunk/SUIT/SUIT-setup-page-example/node_modules/@babel/parser/lib/index.js:12271:10)
+12 error     at /Users/kchamplin/splunk/SUIT/SUIT-setup-page-example/node_modules/@babel/parser/lib/index.js:13637:12
+12 error     at JSXParserMixin.withSmartMixTopicForbiddingContext (/Users/kchamplin/splunk/SUIT/SUIT-setup-page-example/node_modules/@babel/parser/lib/index.js:12617:14)
+12 error     at JSXParserMixin.parseFunction (/Users/kchamplin/splunk/SUIT/SUIT-setup-page-example/node_modules/@babel/parser/lib/index.js:13636:10)
+12 error     at JSXParserMixin.parseFunctionStatement (/Users/kchamplin/splunk/SUIT/SUIT-setup-page-example/node_modules/@babel/parser/lib/index.js:13276:17)
+12 error     at JSXParserMixin.parseStatementContent (/Users/kchamplin/splunk/SUIT/SUIT-setup-page-example/node_modules/@babel/parser/lib/index.js:13037:25)
+12 error     at JSXParserMixin.parseStatement (/Users/kchamplin/splunk/SUIT/SUIT-setup-page-example/node_modules/@babel/parser/lib/index.js:12917:17)
+12 error     at JSXParserMixin.parseBlockOrModuleBlockBody (/Users/kchamplin/splunk/SUIT/SUIT-setup-page-example/node_modules/@babel/parser/lib/index.js:13497:25)
+12 error     at JSXParserMixin.parseBlockBody (/Users/kchamplin/splunk/SUIT/SUIT-setup-page-example/node_modules/@babel/parser/lib/index.js:13489:10)
+12 error     at JSXParserMixin.parseProgram (/Users/kchamplin/splunk/SUIT/SUIT-setup-page-example/node_modules/@babel/parser/lib/index.js:12832:10)
+12 error     at JSXParserMixin.parseTopLevel (/Users/kchamplin/splunk/SUIT/SUIT-setup-page-example/node_modules/@babel/parser/lib/index.js:12822:25)
+12 error     at JSXParserMixin.parse (/Users/kchamplin/splunk/SUIT/SUIT-setup-page-example/node_modules/@babel/parser/lib/index.js:14674:10)
+12 error     at parse (/Users/kchamplin/splunk/SUIT/SUIT-setup-page-example/node_modules/@babel/parser/lib/index.js:14716:38)
+12 error     at parser (/Users/kchamplin/splunk/SUIT/SUIT-setup-page-example/node_modules/@babel/core/lib/parser/index.js:41:34)
+12 error     at parser.next (<anonymous>)
+12 error     at normalizeFile (/Users/kchamplin/splunk/SUIT/SUIT-setup-page-example/node_modules/@babel/core/lib/transformation/normalize-file.js:66:38)
+12 error     at normalizeFile.next (<anonymous>)
+12 error     at run (/Users/kchamplin/splunk/SUIT/SUIT-setup-page-example/node_modules/@babel/core/lib/transformation/index.js:21:50)
+12 error     at run.next (<anonymous>)
+12 error     at transform (/Users/kchamplin/splunk/SUIT/SUIT-setup-page-example/node_modules/@babel/core/lib/transform.js:22:41)
+12 error     at transform.next (<anonymous>)
+12 error     at step (/Users/kchamplin/splunk/SUIT/SUIT-setup-page-example/node_modules/gensync/index.js:261:32)
+12 error     at /Users/kchamplin/splunk/SUIT/SUIT-setup-page-example/node_modules/gensync/index.js:273:13
+12 error     at async.call.result.err.err (/Users/kchamplin/splunk/SUIT/SUIT-setup-page-example/node_modules/gensync/index.js:223:11)
+12 error     at /Users/kchamplin/splunk/SUIT/SUIT-setup-page-example/node_modules/gensync/index.js:189:28
+12 error     at /Users/kchamplin/splunk/SUIT/SUIT-setup-page-example/node_modules/@babel/core/lib/gensync-utils/async.js:72:7
+12 error     at /Users/kchamplin/splunk/SUIT/SUIT-setup-page-example/node_modules/gensync/index.js:113:33
+12 error     at step (/Users/kchamplin/splunk/SUIT/SUIT-setup-page-example/node_modules/gensync/index.js:287:14)
+12 error     at /Users/kchamplin/splunk/SUIT/SUIT-setup-page-example/node_modules/gensync/index.js:273:13
+12 error     at async.call.result.err.err (/Users/kchamplin/splunk/SUIT/SUIT-setup-page-example/node_modules/gensync/index.js:223:11)
+12 error info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.
+12 error
+12 error     at /Users/kchamplin/splunk/SUIT/SUIT-setup-page-example/node_modules/lerna/node_modules/execa/index.js:236:11

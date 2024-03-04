@@ -1,0 +1,2 @@
+cp ./packages/setup-example-app/stage/appserver/static/pages/start.js /Users/kchamplin/splunk/splunk/etc/apps/observe_reporting/appserver/static/pages/settings.js
+#ln -s /Users/kchamplin/splunk/SUIT/SUIT-setup-page-example/packages/setup-example-app/stage /Users/kchamplin/splunk/splunk/etc/apps/setup-example-app
