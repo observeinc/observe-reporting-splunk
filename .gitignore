@@ -1,3 +1,3 @@
-./observe-reporting-splunk/observe_reporting/local/
-*/node_modules/
+observe_reporting/local/
+node_modules/
 *pyc
