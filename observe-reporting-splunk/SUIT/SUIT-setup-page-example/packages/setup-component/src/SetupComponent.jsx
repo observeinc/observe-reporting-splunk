@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Button from '@splunk/react-ui/Button';
 import Heading from '@splunk/react-ui/Heading';
+import Markdown from '@splunk/react-ui/Markdown';
 import List from '@splunk/react-ui/List';
 import Link from '@splunk/react-ui/Link';
 import Text from '@splunk/react-ui/Text';
@@ -70,8 +71,34 @@ async function updateObserveConf(tenant_id,observe_site) {
 
     return n;
 }
+// Markdown for our stuff
+const helpText = `
+## App Overview
+This Splunk app provides a way to query the Observe REST API via a custom search command.
+In order to successfully connect Splunk with Observe; please enter your 12 digit Observe tenant ID, your Observe tenant's site (observeinc.com, ap-1.observeinc.com, eu-1.observeinc.com. etc )
+as well as an API token that has query permissions.
 
-// getter functions
+When configured you can use the custom search command obsv to query specific datasets by their ID. For example:
+
+\`|obsv datasetId="123456"\`
+
+This returns up to 50,000 results total. Max results can be adjusted via Splunk's \`limits.conf\` setting for \`maxresultrows\`, under the \`[searchresults]\` stanza.
+
+### Helper Commands
+You can use \`|obsvds\` to grab a list of datasets. If you want to get really freak nasty, using subsearch you can also return the dataset ID into the core \`| obsv\` command:
+
+\`\`\`
+| obsv [
+    | obsvds | spath
+    | stats count by meta.id, config.name  
+    | search config.name=*Demodata* 
+    | search config.name="*container logs"
+    | rex field=meta.id "dataset:(?<dataset_id>\d{5,10}$)"
+    | return datasetId=$dataset_id 
+]
+\`\`\`
+
+`;
 
 
 /* Function to create a Password */
@@ -188,7 +215,7 @@ const SetupComponent = () => {
                             // if app.conf is successfully updated, then reload the page
                             updateObserveConf(tenant_id,observe_site_id).then((r) => {
                                 if (r.status >= 200 && r.status <= 299) { 
-                                     window.location.href = '/app/observe_reporting/search?q=%7C%20obsv';
+                                     window.location.href = '/app/observe_reporting/search?q=%7C%20obsvds%20%7C%20spath%20%7C%20stats%20count%20by%20meta.id%2C%20config.name';
                                 };
                             });
                             
@@ -220,10 +247,16 @@ const SetupComponent = () => {
                         <ColumnLayout.Row>
                             <ColumnLayout.Column span={6}>
                                 <div className="left">
-                                    <Heading level={2}>Setup</Heading>
-                                    This Splunk app provides a way to query the Observe REST API via a custom search command.
-                                    In order to successfully connect Splunk with Observe, please enter your 12 digit Observe tenant ID, 
-                                    as well as an API token that has query permissions.
+                                <Markdown text={helpText} />
+                                    <img 
+                                    src="https://www.observeinc.com/wp-content/uploads/2024/02/O11y-observability-cloud_9f967e.png"
+                                    alt="new"
+                                    />
+                                </div>
+                            </ColumnLayout.Column>
+                            <ColumnLayout.Column span={6}>
+                                <div className="right">
+                                    <Heading level={2}>App Setup</Heading>
                                     <br></br>
                                     <b>Note: The API Token is different from an Ingest Token!</b>
                                     <div className="field tenant_id">
@@ -245,7 +278,7 @@ const SetupComponent = () => {
                                     <div className="field observe_site">
                                         <div className="title">
                                             <Heading level={3}>Observe Site:</Heading>
-                                            Please specify your Observe site (observeinc.com, observe-eng.com, etc ):
+                                            Please specify your Observe site:
                                         </div>
                                         <Text
                                             inline
@@ -287,14 +320,6 @@ const SetupComponent = () => {
                                     </div>
                                     <br />
                                     <div className="error output" />
-                                </div>
-                            </ColumnLayout.Column>
-                            <ColumnLayout.Column span={6}>
-                                <div className="right">
-                                    <img 
-                                    src="https://www.observeinc.com/wp-content/uploads/2024/02/O11y-observability-cloud_9f967e.png"
-                                    alt="new"
-                                    />
                                 </div>
                             </ColumnLayout.Column>
                         </ColumnLayout.Row>

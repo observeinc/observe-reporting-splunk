@@ -16,15 +16,17 @@ logger.setLevel(os.environ.get('log_level',"DEBUG"))
 @Configuration()
 class GeneratingCSC(GeneratingCommand):
     """
-    The generatingcommand returns data from Observe in 5k chunks
+    The generatingcommand returns data from Observe in up to 50k chunks
 
     Example:
 
     ``| obsv dataset={datasetId}``
 
-    Returns up to 5k records from a dataset
+    Returns up to 50k records from a dataset
     """
     datasetId = Option(require=True)
+    maxRows = Option(require=False)
+
 
     def generate(self):
 
@@ -36,7 +38,8 @@ class GeneratingCSC(GeneratingCommand):
 
         
 
-        logger.error("Detail Payload")
+        logger.error("OBSERVE Search Metadata Debug Log")
+        logger.error("Dataset info: {}".format(self.datasetId))
         logger.error(str(self._metadata))
 
         session_key= self._metadata.searchinfo.session_key
@@ -54,11 +57,12 @@ class GeneratingCSC(GeneratingCommand):
             tok_resp = json.loads((obsv_token.decode('utf-8')))
             logger.debug(json.dumps(tok_resp))
             tenant_tok = tok_resp['entry'][0]['content']['clear_password']
-        logger.debug("Generating %s events from Observe")
+        logger.debug("Generating events from Observe")
         response = observe_query_api(tenant_id,obsv_site,tenant_tok,self.datasetId,earliest_time,latest_time)
-        self.logger.debug(str(response))
+        logger.debug("OBSERVE Raw Response: {}".format(str(response)))
         if response == None:
             yield {'_time':time.time(),'_raw':"Error communicating with Observe, see search.log in search inspector"}
+            return 
         if type(response) is str:
             yield {'_time':time.time(),'_raw':response}
         else:

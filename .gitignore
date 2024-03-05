@@ -3,3 +3,4 @@ node_modules/
 *pyc
 observe-reporting-splunk/observe_reporting/local/
 .gitignore
+observe-reporting-splunk/observe_reporting/metadata/local.meta
