@@ -1,3 +1,5 @@
 observe_reporting/local/
 node_modules/
 *pyc
+observe-reporting-splunk/observe_reporting/local/
+.gitignore

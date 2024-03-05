@@ -51,7 +51,7 @@ async function getObserveTenant() {
 
 }
 
-async function updateObserveConf(tenant_id) {
+async function updateObserveConf(tenant_id,observe_site) {
     // function to update app.conf is_configured property to true when password is successfully added
 
     const fetchInit = defaultFetchInit; // from splunk-utils API
@@ -60,7 +60,11 @@ async function updateObserveConf(tenant_id) {
         `${observeConfEndpoint}`,
         {
             ...fetchInit,
-            body: `tenant_id=${tenant_id}`, // update the configured property
+            body: new URLSearchParams( 
+            {'tenant_id' : tenant_id,
+             'observe_site': observe_site
+            } 
+            )
         }
     );
 
@@ -115,9 +119,11 @@ const SetupComponent = () => {
 
     const [password, setPassword] = useState();
     const [tenant_id, setTenant] = useState();
+    const [observe_site_id,setSite] = useState();
     const [isValid, setValid] = useState(false);
     const [loaded_pass,loadPasswords] = useState("");
     const [loaded_tenant,loadObserveConf] = useState("");
+    const [loaded_site,loadObserveSite] = useState("");
  
 
     useEffect(() => {
@@ -131,13 +137,16 @@ const SetupComponent = () => {
             }).then(handleResponse(200));
 
             try{
-                var resp = n.entry[0].content.tenant_id;
-                console.log(`Observe Tenant Found ${resp}`);
+                var tenant_id = n.entry[0].content.tenant_id;
+                var obsv_site_id = n.entry[0].content.observe_site;
+                console.log(`Observe Tenant Found ${tenant_id} and Observe Site Found ${obsv_site_id}`);
                 //return resp;
-                return loadObserveConf(resp);
+                loadObserveConf(tenant_id);
+                loadObserveSite(obsv_site_id);
             } catch (error) {
                 //return "";
-                return loadObserveConf("");
+                loadObserveConf("");
+                loadObserveSite("");
             }
 
 
@@ -177,7 +186,7 @@ const SetupComponent = () => {
                         // update app.conf
                         if (r.status >= 200 && r.status <= 299) {
                             // if app.conf is successfully updated, then reload the page
-                            updateObserveConf(tenant_id).then((r) => {
+                            updateObserveConf(tenant_id,observe_site_id).then((r) => {
                                 if (r.status >= 200 && r.status <= 299) { 
                                      window.location.href = '/app/observe_reporting/search?q=%7C%20obsv';
                                 };
@@ -228,7 +237,23 @@ const SetupComponent = () => {
                                             placeholder={loaded_tenant}
                                             value={tenant_id}
                                             onChange={(e) => {
-                                                setTenant(e.target.value); // store the password that the user inputs into state
+                                                setTenant(e.target.value); // store the tenant
+                                                handleUserInput(e);
+                                            }}
+                                        />
+                                    </div>
+                                    <div className="field observe_site">
+                                        <div className="title">
+                                            <Heading level={3}>Observe Site:</Heading>
+                                            Please specify your Observe site (observeinc.com, observe-eng.com, etc ):
+                                        </div>
+                                        <Text
+                                            inline
+                                            type="text"
+                                            placeholder={loaded_site}
+                                            value={observe_site_id}
+                                            onChange={(e) => {
+                                                setSite(e.target.value); // store the site
                                                 handleUserInput(e);
                                             }}
                                         />

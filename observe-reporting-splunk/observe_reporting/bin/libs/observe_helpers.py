@@ -41,8 +41,8 @@ obs_query_params = {
 
 query_example = [
     {
-        'query_name': 'CHAMP_SFDC_Data_w_Emails',
-        'dataset_id': '41028873', #champ/sfdc_munge
+        'query_name': 'Observe Splunk Reporting App',
+        'dataset_id': None, #champ/sfdc_munge
         'pipeline': '''
         '''
     }
@@ -64,8 +64,9 @@ def get_token(session_key=None,tenant_id=None):
     resp = sr.simpleRequest(path=url,sessionKey=session_key,getargs={"output_mode":"json"})
     return resp[1]
 
-def observe_query_api(tenant_id=None,tenant_tok=None):
-    if tenant_tok == None or tenant_id == None:
+# observe_query_api(tenant_id,obsv_site,tenant_tok)
+def observe_query_api(tenant_id=None,obsv_site=None,tenant_tok=None,dataset_id=None,earliest_time=None,latest_time=None):
+    if tenant_tok == None or tenant_id == None or obsv_site == None:
         return None
 
     logger = logging.getLogger('obsv_query')
@@ -83,29 +84,40 @@ def observe_query_api(tenant_id=None,tenant_tok=None):
     # marc benioff is an ass hat
     # datetime.datetime.utcnow().isoformat()
     # CHANGE THESE TO BE CONF SETTINGS, PASSWORDS.CONF and CuSTOM CONF
-    obsv_url = "https://{}.observeinc.com/v1/meta/export/query".format(tenant_id)
+    obsv_url = "https://{}.{}/v1/meta/export/query".format(tenant_id,obsv_site)
     obsv_api_key = "Bearer {} {}".format(tenant_id,tenant_tok)
     # ingest token
     #btok =  get_o2_ingest_key()
 
     # set up headers for O2 auth
     headers = {"Authorization": obsv_api_key}
-    today = datetime.now(timezone.utc).date()
-    yesterday = today - timedelta(days=1)
-    start_time = datetime.combine(today, datetime.max.time(), timezone.utc)
-    end_time = datetime.combine(yesterday, datetime.min.time(), timezone.utc)
+    # check for earliest latest time, otherwise default to last 24
+    if earliest_time == None or latest_time == None:
+        today = datetime.now(timezone.utc).date()
+        yesterday = today - timedelta(days=1)
+        start_time = datetime.combine(today, datetime.max.time(), timezone.utc)
+        end_time = datetime.combine(yesterday, datetime.min.time(), timezone.utc)
+        query_params = obs_query_params
+        query_params['startTime'] = end_time.isoformat()
+        query_params['endTime'] = start_time.isoformat()
+        logger.debug("ST: {}\nET:{}".format(query_params['startTime'],query_params['endTime']))
+    
+    else:
+        query_params = obs_query_params
+        # example splunk timestamp: 
+        # earl = 1709510400.0
+        # datetime.utcfromtimestamp(earl)
+        query_params['startTime'] = datetime.utcfromtimestamp(earliest_time).isoformat()
+        query_params['endTime'] = datetime.utcfromtimestamp(latest_time).isoformat()
+        logger.debug("ST: {}\nET:{}".format(query_params['startTime'],query_params['endTime']))
 
-    query_params = obs_query_params
-    query_params['startTime'] = end_time.isoformat()
-    query_params['endTime'] = start_time.isoformat()
-    logger.debug("ST: {}\nET:{}".format(query_params['startTime'],query_params['endTime']))
 
     # we're using the dataset defined on /lib/observe_consts/o2_query_usage_sandbox
     # since its an array of 1, lets just go with
     o2_query = query_example[0]
     
     # Update the dataset ID and pipeline in the query params
-    obs_request_body['query']['stages'][0]['input'][0]['datasetId'] = o2_query['dataset_id']
+    obs_request_body['query']['stages'][0]['input'][0]['datasetId'] = dataset_id#formerly o2_query['dataset_id']
     obs_request_body['query']['stages'][0]['pipeline'] = o2_query['pipeline']
 
     logger.debug("------------Making API Request to Observe------------")
