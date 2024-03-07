@@ -91,9 +91,8 @@ You can use \`|obsvds\` to grab a list of datasets. If you want to get really fr
 | obsv [
     | obsvds | spath
     | stats count by meta.id, config.name  
-    | search config.name=*Demodata* 
-    | search config.name="*container logs"
-    | rex field=meta.id "dataset:(?<dataset_id>\d{5,10}$)"
+    | search config.name="kubernetes/Container Logs"
+    | rex field=meta.id "dataset:(?<dataset_id>\\d{5,10}$)"
     | return datasetId=$dataset_id 
 ]
 \`\`\`
@@ -137,7 +136,25 @@ async function updatePassword(password) {
     return n;
 }
 
+async function enableLookupGen(){
+    const ssurl = `/en-US/splunkd/__raw/servicesNS/Nobody/observe_reporting/configs/conf-savedsearches/LookupGen-Observe_Dataset_Meta`
+    const searchurl = `/en-US/splunkd/__raw/servicesNS/Nobody/observe_reporting/search/jobs`
+    const searchString = `| from savedsearch:"LookupGen-Observe_Dataset_Meta"`
+    const fetchInit = defaultFetchInit; // from splunk-utils API
+    const enable = 1
+    fetchInit.method = 'POST';
+    const n = await fetch(ssurl, {
+        ...fetchInit,
+        body: `enableSched=${enable}`, // enable scheduler for saved search
+    });
+    const n1 = await fetch(searchurl, {
+        ...fetchInit,
+        body: `search=${searchString}`, // run a search
+    });
+    return [n,n1];
 
+
+}
 
 const SetupComponent = () => {
     // create state variables using state hooks
@@ -213,7 +230,11 @@ const SetupComponent = () => {
                             // if app.conf is successfully updated, then reload the page
                             updateObserveConf(tenant_id,observe_site_id).then((r) => {
                                 if (r.status >= 200 && r.status <= 299) { 
-                                     window.location.href = '/app/observe_reporting/search?q=%7C%20obsvds%20%7C%20spath%20%7C%20stats%20count%20by%20meta.id%2C%20config.name';
+                                    enableLookupGen().then(() =>  {
+                                        if(r.status >= 200 && r.status <= 299){
+                                        window.location.href = '/app/observe_reporting/search?q=%7C%20obsvds%20%7C%20spath%20%7C%20stats%20count%20by%20meta.id%2C%20config.name';
+                                        }
+                                    });
                                 };
                             });
                             

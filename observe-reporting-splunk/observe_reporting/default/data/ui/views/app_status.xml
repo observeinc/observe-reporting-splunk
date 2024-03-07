@@ -1,0 +1,50 @@
+<dashboard version="1.1" theme="light">
+  <label>App Status</label>
+  <row>
+    <panel>
+      <title>Observe Tenant</title>
+      <single>
+        <search>
+          <query>| rest /servicesNS/Nobody/observe_reporting/configs/conf-observe
+| eval Observe_Tenant="https://"+tenant_id+"."+observe_site
+| eval Observe_Tenant=if(tenant_id="","NOT CONFIGURED - Go to Settings",Observe_Tenant)
+| table Observe_Tenant</query>
+          <earliest>-24h@h</earliest>
+          <latest>now</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="colorBy">value</option>
+        <option name="colorMode">none</option>
+        <option name="drilldown">none</option>
+        <option name="height">307</option>
+        <option name="numberPrecision">0</option>
+        <option name="rangeColors">["0x53a051","0x0877a6","0xf8be34","0xf1813f","0xdc4e41"]</option>
+        <option name="rangeValues">[0,30,70,100]</option>
+        <option name="showSparkline">1</option>
+        <option name="showTrendIndicator">1</option>
+        <option name="trellis.enabled">0</option>
+        <option name="trellis.scales.shared">1</option>
+        <option name="trellis.size">medium</option>
+        <option name="trendColorInterpretation">standard</option>
+        <option name="trendDisplayMode">absolute</option>
+        <option name="underLabel">Observe Tenant</option>
+        <option name="unitPosition">after</option>
+        <option name="useColors">0</option>
+        <option name="useThousandSeparators">1</option>
+      </single>
+    </panel>
+    <panel>
+      <table>
+        <title>Observe Dataset Info</title>
+        <search>
+          <query>| inputlookup observedatasetmeta
+| eval dataset_id=if(isnull(dataset_id),"Lookup Gen Search Has Not Yet Executed",dataset_id)</query>
+          <earliest>-24h@h</earliest>
+          <latest>now</latest>
+        </search>
+        <option name="drilldown">none</option>
+        <option name="refresh.display">progressbar</option>
+      </table>
+    </panel>
+  </row>
+</dashboard>

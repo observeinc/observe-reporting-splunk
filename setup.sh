@@ -1,6 +1,7 @@
 # setup SPLUNK_HOME environment variable
 SPLUNK_HOME="/Users/kchamplin/splunk/splunk"
-APP_HOME=$SPLUNK_HOME/etc/apps/observe_reporting
+#APP_HOME=$SPLUNK_HOME/etc/apps/observe_reporting
+APP_HOME=/Users/kyle.champlin/programming/SPLUNK_APPS/OBSERVE_REPORTING/observe-reporting-splunk/observe-reporting-splunk/observe_reporting
 # setup symbolic links
 if [ ! -h $APP_HOME ]; then
    ln -s /Users/kchamplin/splunk/observeinc/observe-reporting-splunk/observe_reporting $SPLUNK_HOME/etc/apps/observe_reporting
@@ -15,5 +16,5 @@ fi
 # yarn build
 
 # Copy the build artifacts from our Splunk UI project
-UI_SOURCE="/Users/kchamplin/splunk/observeinc/observe-reporting-splunk/SUIT/SUIT-setup-page-example/packages/setup-example-app/stage/appserver/static/pages"
-cp $UI_SOURCE/pages.js $APP_HOME/appserver/static/pages/settings.js
+UI_SOURCE="/Users/kyle.champlin/programming/SPLUNK_APPS/OBSERVE_REPORTING/observe-reporting-splunk/observe-reporting-splunk/SUIT/SUIT-setup-page-example/packages/setup-example-app/stage/appserver/static/pages"
+cp $UI_SOURCE/start.js $APP_HOME/appserver/static/pages/settings.js
