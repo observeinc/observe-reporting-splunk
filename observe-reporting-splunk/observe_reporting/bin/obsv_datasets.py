@@ -11,7 +11,6 @@ from splunklib.searchcommands import \
 from observe_helpers import observe_query_datasets, get_tenant, get_token
 
 logger = logging.getLogger('obsv_query')
-logger.setLevel(os.environ.get('log_level',"DEBUG"))
 
 @Configuration()
 class GeneratingCSC(GeneratingCommand):

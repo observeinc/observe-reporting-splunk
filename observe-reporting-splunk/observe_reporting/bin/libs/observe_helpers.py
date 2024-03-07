@@ -67,7 +67,6 @@ def observe_query_api(tenant_id=None,obsv_site=None,tenant_tok=None,dataset_id=N
         return None
 
     logger = logging.getLogger('obsv_query')
-    logger.setLevel(os.environ.get('log_level',"ERROR"))
 
     # set up our vert specific SFDC date math
     # MM/dd/yyyy HH:mm:ss is ideal, but probably not possible
@@ -156,7 +155,6 @@ def observe_query_datasets(tenant_id=None,obsv_site=None,tenant_tok=None):
         return None
 
     logger = logging.getLogger('obsv_query')
-    logger.setLevel(os.environ.get('log_level',"ERROR"))
 
     # set up our vert specific SFDC date math
     # MM/dd/yyyy HH:mm:ss is ideal, but probably not possible

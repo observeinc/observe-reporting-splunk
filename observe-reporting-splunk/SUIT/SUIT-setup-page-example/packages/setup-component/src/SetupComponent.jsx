@@ -113,8 +113,6 @@ async function createPassword(password,tenant_id) {
         body: `name=${user}&password=${password}&realm=${realm}`, // put password into passwords.conf
     });
     if (n.status == 409) {
-        console.log("Status code 409 from passwords endpoint");
-        console.log("attempting a pasword update");
         const resp = updatePassword(password);
         return resp;
     }
