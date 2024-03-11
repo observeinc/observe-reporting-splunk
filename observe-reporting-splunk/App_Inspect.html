@@ -75,19 +75,19 @@
                     </tr>
                     <tr>
                         <th>Hash</th>
-                        <td>b29be3f8faa222e36790662d0775a78a</td>
+                        <td>9a4d608fadd5f4e71c7a3c18b736eb80</td>
                     </tr>
                     <tr>
                         <th>AppInspect Request ID</th>
-                        <td>e2198d94-f9c7-4dbf-898f-eb43a767c248</td>
+                        <td>47c260b4-a15b-400a-8426-8bbc6c9deae1</td>
                     </tr>
                     <tr>
                         <th>Run Time</th>
-                        <td>2024-03-06T23:45:54.628863</td>
+                        <td>2024-03-08T17:35:17.088975</td>
                     </tr>
                     <tr>
                         <th>Execution Time</th>
-                        <td>25</td>
+                        <td>24</td>
                     </tr>
                 </tdata>
             </table>
@@ -158,7 +158,7 @@
                         </tr>
                         <tr>
                             <td>Warnings</td>
-                            <td>9</td>
+                            <td>8</td>
                         </tr>
                         <tr>
                             <td>Errors</td>
@@ -166,11 +166,11 @@
                         </tr>
                         <tr>
                             <td>Not Applicable</td>
-                            <td>102</td>
+                            <td>92</td>
                         </tr>
                         <tr>
                             <td>Manual Checks</td>
-                            <td>5</td>
+                            <td>4</td>
                         </tr>
                         <tr>
                             <td>Skipped</td>
@@ -178,7 +178,7 @@
                         </tr>
                         <tr>
                             <td>Successes</td>
-                            <td>121</td>
+                            <td>133</td>
                         </tr>
                     </table>
                 </div>
@@ -431,7 +431,7 @@
 
 
                     <li>
-                        <pre>Splunk has begun gathering telemetry on apps submitted to appinspect, that utilize Splunk UI utility components. Please ignore this warning as it has no impact to your Splunk app. Match: @splunk/ui-utils File: appserver/static/pages/settings.js Line Number: 1</pre>
+                        <pre>Splunk has begun gathering telemetry on apps submitted to appinspect, that utilize Splunk UI utility components. Please ignore this warning as it has no impact to your Splunk app. Match: @splunk/splunk-utils File: appserver/static/pages/settings.js Line Number: 1</pre>
                     </li>
 
 
@@ -446,7 +446,7 @@
 
 
                     <li>
-                        <pre>Splunk has begun gathering telemetry on apps submitted to appinspect, that utilize Splunk UI. Please ignore this warning as it has no impact to your Splunk app. Match: @splunk/react-ui File: appserver/static/pages/settings.js Line Number: 1</pre>
+                        <pre>Splunk has begun gathering telemetry on apps submitted to appinspect, that utilize Splunk UI. Please ignore this warning as it has no impact to your Splunk app. Match: @splunk/react-icons File: appserver/static/pages/settings.js Line Number: 1</pre>
                     </li>
 
 
@@ -784,17 +784,6 @@
             <div id="check_meta_files" class="group">
 
 
-                <h5> check_kos_are_accessible</h5>
-                <ul>
-
-
-                    <li>
-                        <pre>The &#39;admin&#39; role is not available to Splunk Cloud customers. Please consider also including the &#39;sc_admin&#39; role if you want Splunk Cloud customer administrators to be able to access this knowledge object File: metadata/default.meta Line Number: 3</pre>
-                    </li>
-
-
-                </ul>
-
 
             </div>
 
@@ -924,7 +913,7 @@
 
 
                     <li>
-                        <pre>Bias language is found in the app. !function(e){var n={};function t(c){if(n[c])return n[c].exports;v... (appserver/static/pages/settings.js:1) [master]. File: settings.js Line Number: 1</pre>
+                        <pre>Bias language is found in the app. !function(e){var n={};function t(c){if(n[c])return n[c].exports;v... (appserver/static/pages/settings.js:1) [blacklist]. File: settings.js Line Number: 1</pre>
                     </li>
 
 
@@ -1512,16 +1501,11 @@
                     </ul>
                 </div>
 
-                <div id="check_cloud_simple_app.check_lookups_allow_list" class="box check not_applicable">
-                    <h6>[ <span class="not_applicable">not_applicable</span> ] check_lookups_allow_list - Check that
-                        lookups/ contains only approved file types (.csv, .csv.default, .csv.gz, .csv.tgz, .kmz) or
-                        files formatted as valid csv. Ensure malicious files are not passed off as lookup files.</h6>
+                <div id="check_cloud_simple_app.check_lookups_allow_list" class="box check success">
+                    <h6>[ <span class="success">success</span> ] check_lookups_allow_list - Check that lookups/ contains
+                        only approved file types (.csv, .csv.default, .csv.gz, .csv.tgz, .kmz) or files formatted as
+                        valid csv. Ensure malicious files are not passed off as lookup files.</h6>
                     <ul class="check_messages">
-
-                        <li>
-                            <pre>The `lookups` directory does not exist.</pre>
-
-                        </li>
 
                     </ul>
                 </div>
@@ -2126,17 +2110,11 @@
                     </ul>
                 </div>
 
-                <div id="check_cloud_simple_app.check_transforms_conf_for_external_cmd"
-                    class="box check not_applicable">
-                    <h6>[ <span class="not_applicable">not_applicable</span> ] check_transforms_conf_for_external_cmd -
-                        Check that transforms.conf does not contain any transforms with malicious
+                <div id="check_cloud_simple_app.check_transforms_conf_for_external_cmd" class="box check success">
+                    <h6>[ <span class="success">success</span> ] check_transforms_conf_for_external_cmd - Check that
+                        transforms.conf does not contain any transforms with malicious
                         command scripts specified by external_cmd=&lt;string&gt; attribute.</h6>
                     <ul class="check_messages">
-
-                        <li>
-                            <pre>`default/transforms.conf` does not exist.</pre>
-
-                        </li>
 
                     </ul>
                 </div>
@@ -2233,7 +2211,7 @@
                     <ul class="check_messages">
 
                         <li>
-                            <pre>Splunk has begun gathering telemetry on apps submitted to appinspect, that utilize Splunk UI utility components. Please ignore this warning as it has no impact to your Splunk app. Match: @splunk/ui-utils File: appserver/static/pages/settings.js Line Number: 1</pre>
+                            <pre>Splunk has begun gathering telemetry on apps submitted to appinspect, that utilize Splunk UI utility components. Please ignore this warning as it has no impact to your Splunk app. Match: @splunk/splunk-utils File: appserver/static/pages/settings.js Line Number: 1</pre>
 
                         </li>
 
@@ -2254,7 +2232,7 @@
                     <ul class="check_messages">
 
                         <li>
-                            <pre>Splunk has begun gathering telemetry on apps submitted to appinspect, that utilize Splunk UI. Please ignore this warning as it has no impact to your Splunk app. Match: @splunk/react-ui File: appserver/static/pages/settings.js Line Number: 1</pre>
+                            <pre>Splunk has begun gathering telemetry on apps submitted to appinspect, that utilize Splunk UI. Please ignore this warning as it has no impact to your Splunk app. Match: @splunk/react-icons File: appserver/static/pages/settings.js Line Number: 1</pre>
 
                         </li>
 
@@ -2307,7 +2285,7 @@
                     <ul class="check_messages">
 
                         <li>
-                            <pre>The following line will be inspected during code review. Match: console.log(&#34;Status code 409 from passwords endpoint&#34;) File: appserver/static/pages/settings.js Line Number: 1</pre>
+                            <pre>The following line will be inspected during code review. Match: console.log(`Found numeric literal: ${token.content}`) File: appserver/static/pages/settings.js Line Number: 1</pre>
 
                         </li>
 
@@ -2614,15 +2592,10 @@
                     features and Changes for Splunk App developers.</h5>
 
                 <div id="check_splunk_6_3_deprecated_features.check_for_run_script_alert_action"
-                    class="box check not_applicable">
-                    <h6>[ <span class="not_applicable">not_applicable</span> ] check_for_run_script_alert_action - Check
-                        for use of running a script in alert action</h6>
+                    class="box check success">
+                    <h6>[ <span class="success">success</span> ] check_for_run_script_alert_action - Check for use of
+                        running a script in alert action</h6>
                     <ul class="check_messages">
-
-                        <li>
-                            <pre>savedsearches.conf does not exist</pre>
-
-                        </li>
 
                     </ul>
                 </div>
@@ -3034,19 +3007,13 @@
                     Lookups add fields from an external source to events based on the values of fields that are already
                     present in those events.</h5>
 
-                <div id="check_lookup_files.check_for_lookups_file_name" class="box check not_applicable">
-                    <h6>[ <span class="not_applicable">not_applicable</span> ] check_for_lookups_file_name - Check that
-                        no two files/directories under the lookups directory have this naming pattern respectively:xxx
-                        and xxx.default - with the only difference in the .default extension.During the installation of
-                        an app in Splunk Cloud, a lookup file will be temporarily renamed to append an
-                        additional.default extension to it, which will cause error if a namesake file already exists.
-                    </h6>
+                <div id="check_lookup_files.check_for_lookups_file_name" class="box check success">
+                    <h6>[ <span class="success">success</span> ] check_for_lookups_file_name - Check that no two
+                        files/directories under the lookups directory have this naming pattern respectively:xxx and
+                        xxx.default - with the only difference in the .default extension.During the installation of an
+                        app in Splunk Cloud, a lookup file will be temporarily renamed to append an additional.default
+                        extension to it, which will cause error if a namesake file already exists.</h6>
                     <ul class="check_messages">
-
-                        <li>
-                            <pre>lookups folder does not exist</pre>
-
-                        </li>
 
                     </ul>
                 </div>
@@ -3058,92 +3025,56 @@
                     Saved searches are defined in a savedsearches.conf file located in the /default and /local directory
                     of the app. For more, see Save and share your reports and savedsearches.conf.</h5>
 
-                <div id="check_saved_searches.check_for_gratuitous_cron_scheduling" class="box check not_applicable">
-                    <h6>[ <span class="not_applicable">not_applicable</span> ] check_for_gratuitous_cron_scheduling -
-                        check that savedsearches.conf searches are cron scheduledreasonably. Less than five asterisks
-                        should be used.</h6>
+                <div id="check_saved_searches.check_for_gratuitous_cron_scheduling" class="box check success">
+                    <h6>[ <span class="success">success</span> ] check_for_gratuitous_cron_scheduling - check that
+                        savedsearches.conf searches are cron scheduledreasonably. Less than five asterisks should be
+                        used.</h6>
                     <ul class="check_messages">
-
-                        <li>
-                            <pre>savedsearches.conf does not exist</pre>
-
-                        </li>
 
                     </ul>
                 </div>
 
-                <div id="check_saved_searches.check_for_real_time_saved_searches_for_cloud"
-                    class="box check not_applicable">
-                    <h6>[ <span class="not_applicable">not_applicable</span> ]
-                        check_for_real_time_saved_searches_for_cloud - Check that no real-time pre-index saved searches
-                        are being used insavedsearches.conf. Real-time pre-index saved searches are extremelysystem
-                        intensive and should be avoided.</h6>
+                <div id="check_saved_searches.check_for_real_time_saved_searches_for_cloud" class="box check success">
+                    <h6>[ <span class="success">success</span> ] check_for_real_time_saved_searches_for_cloud - Check
+                        that no real-time pre-index saved searches are being used insavedsearches.conf. Real-time
+                        pre-index saved searches are extremelysystem intensive and should be avoided.</h6>
                     <ul class="check_messages">
-
-                        <li>
-                            <pre>savedsearches.conf does not exist</pre>
-
-                        </li>
 
                     </ul>
                 </div>
 
                 <div id="check_saved_searches.check_for_sched_saved_searches_action_script_filename"
-                    class="box check not_applicable">
-                    <h6>[ <span class="not_applicable">not_applicable</span> ]
-                        check_for_sched_saved_searches_action_script_filename - Check that savedsearch.conf stanzas do
-                        not contain action.script.filename option</h6>
+                    class="box check success">
+                    <h6>[ <span class="success">success</span> ] check_for_sched_saved_searches_action_script_filename -
+                        Check that savedsearch.conf stanzas do not contain action.script.filename option</h6>
                     <ul class="check_messages">
-
-                        <li>
-                            <pre>savedsearches.conf does not exist</pre>
-
-                        </li>
 
                     </ul>
                 </div>
 
-                <div id="check_saved_searches.check_for_sched_saved_searches_earliest_time"
-                    class="box check not_applicable">
-                    <h6>[ <span class="not_applicable">not_applicable</span> ]
-                        check_for_sched_saved_searches_earliest_time - Check that if a scheduled saved search in
-                        savedsearch.conf contains dispatch.earliest_time option, or if a scheduled saved search with
-                        auto summary enabled contains auto_summarize.dispatch.earliest_time option</h6>
+                <div id="check_saved_searches.check_for_sched_saved_searches_earliest_time" class="box check success">
+                    <h6>[ <span class="success">success</span> ] check_for_sched_saved_searches_earliest_time - Check
+                        that if a scheduled saved search in savedsearch.conf contains dispatch.earliest_time option, or
+                        if a scheduled saved search with auto summary enabled contains
+                        auto_summarize.dispatch.earliest_time option</h6>
                     <ul class="check_messages">
-
-                        <li>
-                            <pre>savedsearches.conf does not exist</pre>
-
-                        </li>
 
                     </ul>
                 </div>
 
-                <div id="check_saved_searches.check_for_sched_saved_searches_latest_time"
-                    class="box check not_applicable">
-                    <h6>[ <span class="not_applicable">not_applicable</span> ]
-                        check_for_sched_saved_searches_latest_time - Check that if a savedsearch.conf stanza contains
-                        scheduling optionsit does contain a dispatch.latest_time</h6>
+                <div id="check_saved_searches.check_for_sched_saved_searches_latest_time" class="box check success">
+                    <h6>[ <span class="success">success</span> ] check_for_sched_saved_searches_latest_time - Check that
+                        if a savedsearch.conf stanza contains scheduling optionsit does contain a dispatch.latest_time
+                    </h6>
                     <ul class="check_messages">
-
-                        <li>
-                            <pre>savedsearches.conf does not exist</pre>
-
-                        </li>
 
                     </ul>
                 </div>
 
-                <div id="check_saved_searches.check_for_saved_searches_populate_lookup"
-                    class="box check not_applicable">
-                    <h6>[ <span class="not_applicable">not_applicable</span> ] check_for_saved_searches_populate_lookup
-                        - Check that savedsearch.conf stanza do not contain action.populate_lookup option`.</h6>
+                <div id="check_saved_searches.check_for_saved_searches_populate_lookup" class="box check success">
+                    <h6>[ <span class="success">success</span> ] check_for_saved_searches_populate_lookup - Check that
+                        savedsearch.conf stanza do not contain action.populate_lookup option`.</h6>
                     <ul class="check_messages">
-
-                        <li>
-                            <pre>savedsearches.conf does not exist</pre>
-
-                        </li>
 
                     </ul>
                 </div>
@@ -3447,16 +3378,11 @@
                 <h5>Meta file standards
                     Ensure that all meta files located in the /metadata folder are well-formed and valid.</h5>
 
-                <div id="check_meta_files.check_kos_are_accessible" class="box check warning">
-                    <h6>[ <span class="warning">warning</span> ] check_kos_are_accessible - Check that knowledge objects
+                <div id="check_meta_files.check_kos_are_accessible" class="box check success">
+                    <h6>[ <span class="success">success</span> ] check_kos_are_accessible - Check that knowledge objects
                         with access control restrictions defined in *.meta files are accessible to customers in Splunk
                         Cloud.</h6>
                     <ul class="check_messages">
-
-                        <li>
-                            <pre>The &#39;admin&#39; role is not available to Splunk Cloud customers. Please consider also including the &#39;sc_admin&#39; role if you want Splunk Cloud customer administrators to be able to access this knowledge object File: metadata/default.meta Line Number: 3</pre>
-
-                        </li>
 
                     </ul>
                 </div>
@@ -3956,7 +3882,7 @@
                     <ul class="check_messages">
 
                         <li>
-                            <pre>Bias language is found in the app. !function(e){var n={};function t(c){if(n[c])return n[c].exports;v... (appserver/static/pages/settings.js:1) [master]. File: settings.js Line Number: 1</pre>
+                            <pre>Bias language is found in the app. !function(e){var n={};function t(c){if(n[c])return n[c].exports;v... (appserver/static/pages/settings.js:1) [blacklist]. File: settings.js Line Number: 1</pre>
 
                         </li>
 
@@ -3995,31 +3921,11 @@
             <div id="check_security" class="group">
                 <h5>Security vulnerabilities</h5>
 
-                <div id="check_security.check_for_environment_variable_use_in_python" class="box check manual_check">
-                    <h6>[ <span class="manual_check">manual_check</span> ] check_for_environment_variable_use_in_python
-                        - Check for environment variable manipulation and attempts to monitor
+                <div id="check_security.check_for_environment_variable_use_in_python" class="box check success">
+                    <h6>[ <span class="success">success</span> ] check_for_environment_variable_use_in_python - Check
+                        for environment variable manipulation and attempts to monitor
                         sensitive environment variables.</h6>
                     <ul class="check_messages">
-
-                        <li>
-                            <pre>Environment variable being used in bin/libs/observe_helpers.py:70: os.environ.get. File: bin/libs/observe_helpers.py Line Number: 70</pre>
-
-                        </li>
-
-                        <li>
-                            <pre>Environment variable being used in bin/obsv_fetch.py:14: os.environ.get. File: bin/obsv_fetch.py Line Number: 14</pre>
-
-                        </li>
-
-                        <li>
-                            <pre>Environment variable being used in bin/obsv_datasets.py:14: os.environ.get. File: bin/obsv_datasets.py Line Number: 14</pre>
-
-                        </li>
-
-                        <li>
-                            <pre>Environment variable being used in bin/libs/observe_helpers.py:159: os.environ.get. File: bin/libs/observe_helpers.py Line Number: 159</pre>
-
-                        </li>
 
                     </ul>
                 </div>
@@ -4030,12 +3936,12 @@
                     <ul class="check_messages">
 
                         <li>
-                            <pre>Possible insecure HTTP Connection. Match: requests.post Positional arguments, [&#34;?&#34;]; Keyword arguments, {&#34;headers&#34;: &#34;?&#34;, &#34;params&#34;: &#34;?&#34;, &#34;json&#34;: &#34;?&#34;} File: bin/libs/observe_helpers.py Line Number: 131</pre>
+                            <pre>Possible insecure HTTP Connection. Match: requests.post Positional arguments, [&#34;?&#34;]; Keyword arguments, {&#34;headers&#34;: &#34;?&#34;, &#34;params&#34;: &#34;?&#34;, &#34;json&#34;: &#34;?&#34;} File: bin/libs/observe_helpers.py Line Number: 130</pre>
 
                         </li>
 
                         <li>
-                            <pre>Possible insecure HTTP Connection. Match: requests.get Positional arguments, [&#34;?&#34;]; Keyword arguments, {&#34;headers&#34;: &#34;?&#34;} File: bin/libs/observe_helpers.py Line Number: 182</pre>
+                            <pre>Possible insecure HTTP Connection. Match: requests.get Positional arguments, [&#34;?&#34;]; Keyword arguments, {&#34;headers&#34;: &#34;?&#34;} File: bin/libs/observe_helpers.py Line Number: 180</pre>
 
                         </li>
 
@@ -4048,12 +3954,12 @@
                     <ul class="check_messages">
 
                         <li>
-                            <pre>The following line will be inspected during code review.Possible secret disclosure found. Match: passauth = true File: default/commands.conf Line Number: 6</pre>
+                            <pre>The following line will be inspected during code review.Possible secret disclosure found. Match: passauth = true File: default/commands.conf Line Number: 14</pre>
 
                         </li>
 
                         <li>
-                            <pre>The following line will be inspected during code review.Possible secret disclosure found. Match: passauth = true File: default/commands.conf Line Number: 14</pre>
+                            <pre>The following line will be inspected during code review.Possible secret disclosure found. Match: passauth = true File: default/commands.conf Line Number: 6</pre>
 
                         </li>
 
