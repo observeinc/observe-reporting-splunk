@@ -8,7 +8,7 @@ import json
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "libs"))
 from splunklib.searchcommands import \
     dispatch, StreamingCommand, Configuration, Option, validators
-from observe_helpers import observe_query_datasets, get_tenant, get_token
+from observe_helpers import observe_ingest, get_tenant, get_token
 
 logger = logging.getLogger('obsv_ingest')
 
@@ -22,9 +22,6 @@ class StreamingCSC(StreamingCommand):
     ``| makeresults count=5 | eval celsius = random()%100 | obsvhttp``
 
     """
-
-
-
     def stream(self, records):
 
         # To connect with Splunk, use the instantiated service object which is created using the server-uri and
@@ -51,10 +48,11 @@ class StreamingCSC(StreamingCommand):
             tenant_tok = tok_resp['entry'][0]['content']['clear_password']
         logger.debug("Shipping events to Observe")
         for record in records:
-            response = observe_query_api(tenant_id,obsv_site,tenant_tok,self.datasetId,earliest_time,latest_time)
+            # observe_ingest(tenant_id=None,obsv_site=None,payload=None, btok=None, extras=None)
+            response = observe_ingest(tenant_id,obsv_site,json.dumps(record),tenant_tok)
             logger.debug("OBSERVE Raw Response: {}".format(str(response)))
             if response == None:
-                yield {'_time':time.time(),'_raw':"Error communicating with Observe, see search.log in search inspector"}
+                yield {'_time':time.time(),'_raw':"Error communicating with Observe Ingest, see search.log in search inspector"}
                 return 
 
 

@@ -1,7 +1,7 @@
 {
   "schemaVersion": "2.0.0",
   "info": {
-    "title": "Observe Reporting Module",
+    "title": "Observe For Splunk",
     "id": {
       "group": null,
       "name": "observe_reporting",
@@ -15,7 +15,7 @@
       }
     ],
     "releaseDate": null,
-    "description": "Observe Reporting Module",
+    "description": "Observe For Splunk",
     "classification": {
       "intendedAudience": null,
       "categories": [],

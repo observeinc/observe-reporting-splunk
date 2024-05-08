@@ -85,7 +85,7 @@ When configured you can use the custom search command obsv to query specific dat
 This returns up to 50,000 results total. Max results can be adjusted via Splunk's \`limits.conf\` setting for \`maxresultrows\`, under the \`[searchresults]\` stanza.
 
 ### Helper Commands
-You can use \`|obsvds\` to grab a list of datasets. If you want to get really freak nasty, using subsearch you can also return the dataset ID into the core \`| obsv\` command:
+You can use \`|obsvds\` to grab a list of datasets. Try using subsearch to return the dataset ID into the core \`| obsv\` command:
 
 \`\`\`
 | obsv [
@@ -304,7 +304,7 @@ const SetupComponent = () => {
         <>
             <div>
                 <div>
-                    <Heading level={1}>Welcome to the Observe Reporting App for Splunk</Heading>
+                    <Heading level={1}>Welcome to the Observe App for Splunk</Heading>
                     <ColumnLayout divider="vertical">
                         <ColumnLayout.Row>
                             <ColumnLayout.Column span={6}>
@@ -324,7 +324,7 @@ const SetupComponent = () => {
                                     <div className="field tenant_id">
                                         <div className="title">
                                             <Heading level={3}>Observe Tenant ID:</Heading>
-                                            Please specify your Observe Tenant ID:
+                                            Please specify your Observe Tenant ID
                                         </div>
                                         <Text
                                             inline
@@ -340,7 +340,7 @@ const SetupComponent = () => {
                                     <div className="field observe_site">
                                         <div className="title">
                                             <Heading level={3}>Observe Site:</Heading>
-                                            Please specify your Observe site:
+                                            Please specify your Observe site
                                         </div>
                                         <Text
                                             inline
@@ -356,7 +356,7 @@ const SetupComponent = () => {
                                     <div className="field api_key">
                                         <div className="title">
                                             <Heading level={3}>Observe API Token:</Heading>
-                                            Please specify the API token for your Observe tenant:
+                                            Please specify the API token for your Observe tenant
                                         </div>
                                         <Text
                                             inline
@@ -372,7 +372,7 @@ const SetupComponent = () => {
                                     <div className="field ingest_key">
                                         <div className="title">
                                             <Heading level={3}>Observe Ingest Token:</Heading>
-                                            Please provide an Ingest Token for your Observe tenant:
+                                            Please provide an Ingest Token for your Observe tenant
                                         </div>
                                         <Text
                                             inline

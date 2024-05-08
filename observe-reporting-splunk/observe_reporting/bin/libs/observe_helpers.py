@@ -205,3 +205,17 @@ def observe_query_datasets(tenant_id=None,obsv_site=None,tenant_tok=None):
                 #example on how to handle the max_time field in our response
         """
         return response  
+
+def observe_ingest(tenant_id=None,obsv_site=None,payload=None, btok=None, extras=None):
+    logger = logging.getLogger('obsv_ingest')
+    url = "https://{}.collect.{}/v1/http".format(tenant_id,obsv_site)
+    headers = { "Authorization" : btok, "Content-type": "application/json"}
+    try:
+        resp=requests.post(url,headers=headers,data=payload,params=extras)
+        logger.debug(str("Observe Ingest API response: {}".format(resp.text)))
+        return resp.text
+    except Exception as e:
+        logger.error("Exception occurred when sending data to Observe ingest")
+        logger.debug(str(e))
+        return None
+
