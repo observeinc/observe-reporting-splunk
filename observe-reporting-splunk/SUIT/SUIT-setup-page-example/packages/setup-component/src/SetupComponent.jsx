@@ -122,11 +122,48 @@ async function createPassword(password,tenant_id) {
 
 }
 
+
+/* Function to create a Password */
+async function createIngestPassword(ingest_password,tenant_id) {
+    const fetchInit = defaultFetchInit; // from splunk-utils API
+    fetchInit.method = 'POST';
+    const realm = 'ObserveIngest';
+    const user = tenant_id;
+
+    const n = await fetch(`${passwordsEndpoint}`, {
+        ...fetchInit,
+        body: `name=${user}&password=${ingest_password}&realm=${realm}`, // put password into passwords.conf
+    });
+    if (n.status == 409) {
+        const resp = updateIngestPassword(password);
+        return resp;
+    }
+    else {
+        return n;
+    }
+
+
+}
+
 async function updatePassword(password) {
     const fetchInit = defaultFetchInit; // from splunk-utils API
     const tid = await getObserveTenant();
     fetchInit.method = 'POST';
     const realm = 'Observe';
+    const user = tid;
+
+    const n = await fetch(`${passwordsEndpoint}/${realm}:${user}`, {
+        ...fetchInit,
+        body: `password=${password}`, // put password into passwords.conf
+    });
+    return n;
+}
+
+async function updateIngestPassword(password) {
+    const fetchInit = defaultFetchInit; // from splunk-utils API
+    const tid = await getObserveTenant();
+    fetchInit.method = 'POST';
+    const realm = 'ObserveIngest';
     const user = tid;
 
     const n = await fetch(`${passwordsEndpoint}/${realm}:${user}`, {
@@ -160,6 +197,7 @@ const SetupComponent = () => {
     // create state variables using state hooks
 
     const [password, setPassword] = useState();
+    const [ingest_password,setIngestPassword] = useState();
     const [tenant_id, setTenant] = useState();
     const [observe_site_id,setSite] = useState();
     const [isValid, setValid] = useState(false);
@@ -222,24 +260,29 @@ const SetupComponent = () => {
     const passwordClick = () => {
         if (isValid) {
             createPassword(password,tenant_id).then((response) => {
+                // check if query API key is stored successfully
                 if (response.status >= 200 && response.status <= 299) {
-                    // check if password was successfully stored
-                    updateAppConf().then((r) => {
-                        // update app.conf
+                    createIngestPassword(ingest_password,tenant_id).then((response) => {
+                    // check if ingest key was successfully stored successfully
                         if (r.status >= 200 && r.status <= 299) {
-                            // if app.conf is successfully updated, then reload the page
-                            updateObserveConf(tenant_id,observe_site_id).then((r) => {
-                                if (r.status >= 200 && r.status <= 299) { 
-                                    enableLookupGen().then(() =>  {
-                                        if(r.status >= 200 && r.status <= 299){
-                                        window.location.href = '/app/observe_reporting/search?q=%7C%20obsvds%20%7C%20spath%20%7C%20stats%20count%20by%20meta.id%2C%20config.name';
-                                        }
+                            updateAppConf().then((r) => {
+                                // update app.conf
+                                if (r.status >= 200 && r.status <= 299) {
+                                    // if app.conf is successfully updated, then reload the page
+                                    updateObserveConf(tenant_id,observe_site_id).then((r) => {
+                                        if (r.status >= 200 && r.status <= 299) { 
+                                            enableLookupGen().then(() =>  {
+                                                if(r.status >= 200 && r.status <= 299){
+                                                window.location.href = '/app/observe_reporting/search?q=%7C%20obsvds%20%7C%20spath%20%7C%20stats%20count%20by%20meta.id%2C%20config.name';
+                                                }
+                                            });
+                                        };
                                     });
-                                };
+                                    
+                                }
                             });
-                            
                         }
-                    });
+                    });          
                 } else {
                     console.log('error');
                 }
@@ -322,6 +365,22 @@ const SetupComponent = () => {
                                             value={password}
                                             onChange={(e) => {
                                                 setPassword(e.target.value); // store the password that the user inputs into state
+                                                handleUserInput(e);
+                                            }}
+                                        />
+                                    </div>
+                                    <div className="field ingest_key">
+                                        <div className="title">
+                                            <Heading level={3}>Observe Ingest Token:</Heading>
+                                            Please provide an Ingest Token for your Observe tenant:
+                                        </div>
+                                        <Text
+                                            inline
+                                            type="password"
+                                            passwordVisibilityToggle="true"
+                                            value={ingest_pasword}
+                                            onChange={(e) => {
+                                                setIngestPassword(e.target.value); // store the password that the user inputs into state
                                                 handleUserInput(e);
                                             }}
                                         />

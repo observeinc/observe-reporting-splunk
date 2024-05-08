@@ -61,6 +61,14 @@ def get_token(session_key=None,tenant_id=None):
     resp = sr.simpleRequest(path=url,sessionKey=session_key,getargs={"output_mode":"json"})
     return resp[1]
 
+def get_ingest_token(session_key=None,tenant_id=None):
+    if session_key == None or tenant_id == None:
+        return None
+    # /servicesNS/nobody/secret_storage_test/storage/passwords/realm1:user1
+    url = "/servicesNS/nobody/observe_reporting/storage/passwords/ObserveIngest:"+tenant_id
+    resp = sr.simpleRequest(path=url,sessionKey=session_key,getargs={"output_mode":"json"})
+    return resp[1]
+
 # observe_query_api(tenant_id,obsv_site,tenant_tok)
 def observe_query_api(tenant_id=None,obsv_site=None,tenant_tok=None,dataset_id=None,earliest_time=None,latest_time=None):
     if tenant_tok == None or tenant_id == None or obsv_site == None:
