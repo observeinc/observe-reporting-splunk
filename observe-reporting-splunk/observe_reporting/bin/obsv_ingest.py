@@ -8,7 +8,7 @@ import json
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "libs"))
 from splunklib.searchcommands import \
     dispatch, StreamingCommand, Configuration, Option, validators
-from observe_helpers import observe_ingest, get_tenant, get_token
+from observe_helpers import observe_ingest, get_tenant, get_ingest_token
 
 logger = logging.getLogger('obsv_ingest')
 
@@ -30,7 +30,6 @@ class StreamingCSC(StreamingCommand):
         #    service = self.service
         #    info = service.info //access the Splunk Server info
         logger.error("OBSERVE Search Metadata Debug Log")
-        logger.error("Dataset info: {}".format(self.datasetId))
         logger.error(str(self._metadata))
 
         session_key= self._metadata.searchinfo.session_key
@@ -42,7 +41,7 @@ class StreamingCSC(StreamingCommand):
             ten_resp = json.loads(obsv_ten.decode('utf-8'))
             tenant_id = ten_resp['entry'][0]['content']['tenant_id']
             obsv_site = ten_resp['entry'][0]['content']['observe_site']
-            obsv_token = get_token(session_key=session_key,tenant_id=tenant_id)
+            obsv_token = get_ingest_token(session_key=session_key,tenant_id=tenant_id)
             tok_resp = json.loads((obsv_token.decode('utf-8')))
             logger.debug(json.dumps(tok_resp))
             tenant_tok = tok_resp['entry'][0]['content']['clear_password']
@@ -53,7 +52,10 @@ class StreamingCSC(StreamingCommand):
             logger.debug("OBSERVE Raw Response: {}".format(str(response)))
             if response == None:
                 yield {'_time':time.time(),'_raw':"Error communicating with Observe Ingest, see search.log in search inspector"}
-                return 
+                return
+            else:
+                record["OBSERVE_RESPONSE"] = response
+                yield record
 
 
 dispatch(StreamingCSC, sys.argv, sys.stdin, sys.stdout, __name__)

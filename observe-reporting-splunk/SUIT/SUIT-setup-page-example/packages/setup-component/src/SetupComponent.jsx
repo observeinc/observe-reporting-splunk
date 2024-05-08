@@ -378,7 +378,7 @@ const SetupComponent = () => {
                                             inline
                                             type="password"
                                             passwordVisibilityToggle="true"
-                                            value={ingest_pasword}
+                                            value={ingest_password}
                                             onChange={(e) => {
                                                 setIngestPassword(e.target.value); // store the password that the user inputs into state
                                                 handleUserInput(e);
