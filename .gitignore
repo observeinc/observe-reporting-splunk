@@ -4,3 +4,4 @@ node_modules/
 observe-reporting-splunk/observe_reporting/local/
 .gitignore
 observe-reporting-splunk/observe_reporting/metadata/local.meta
+observe-reporting-splunk/.DS_Store
