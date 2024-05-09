@@ -5,3 +5,4 @@ observe-reporting-splunk/observe_reporting/local/
 .gitignore
 observe-reporting-splunk/observe_reporting/metadata/local.meta
 observe-reporting-splunk/.DS_Store
+observe-reporting-splunk/observe_reporting/.DS_Store
