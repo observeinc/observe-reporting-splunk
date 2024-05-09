@@ -4,6 +4,7 @@ import os
 import logging
 import time
 import json
+import requests
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "libs"))
 from splunklib.searchcommands import \
@@ -29,8 +30,8 @@ class StreamingCSC(StreamingCommand):
         # Example:-
         #    service = self.service
         #    info = service.info //access the Splunk Server info
-        logger.error("OBSERVE Search Metadata Debug Log")
-        logger.error(str(self._metadata))
+        logger.debug("OBSERVE Search Metadata Debug Log")
+        logger.debug(str(self._metadata))
 
         session_key= self._metadata.searchinfo.session_key
         obsv_ten = get_tenant(session_key=session_key)
@@ -46,9 +47,11 @@ class StreamingCSC(StreamingCommand):
             logger.debug(json.dumps(tok_resp))
             tenant_tok = tok_resp['entry'][0]['content']['clear_password']
         logger.debug("Shipping events to Observe")
+        # create our session object from Requests
+        sess = requests.Session()
         for record in records:
             # observe_ingest(tenant_id=None,obsv_site=None,payload=None, btok=None, extras=None)
-            response = observe_ingest(tenant_id,obsv_site,json.dumps(record),tenant_tok)
+            response = observe_ingest(sess,tenant_id,obsv_site,json.dumps(record),tenant_tok)
             logger.debug("OBSERVE Raw Response: {}".format(str(response)))
             if response == None:
                 yield {'_time':time.time(),'_raw':"Error communicating with Observe Ingest, see search.log in search inspector"}
