@@ -5,12 +5,12 @@
     "id": {
       "group": null,
       "name": "observe_reporting",
-      "version": "1.0.1"
+      "version": "1.0.3"
     },
     "author": [
       {
         "name": "Kyle Champlin",
-        "email": "kyle.champlin@observeinc.com",
+        "email": "splunkbase@observeinc.com",
         "company": "Observe Inc."
       }
     ],
